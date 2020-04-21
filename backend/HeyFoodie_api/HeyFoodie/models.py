@@ -1,16 +1,18 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
+from django.utils.safestring import mark_safe
+import datetime
 
 # Create your models here.
 
 class Image(models.Model):
     image_id = models.AutoField(primary_key=True)
-    image = models.BinaryField(blank=True)
+    image = models.ImageField(blank=True, upload_to='Image')
     image_detail = models.CharField(max_length=255)
 
     def __str__(self):
         return self.image_detail
-        
+
 class Owner(models.Model):
     owner_id = models.AutoField(primary_key=True)
     owner_name = models.CharField(max_length=100)
@@ -21,10 +23,17 @@ class Owner(models.Model):
     bankacc_no = models.CharField(max_length=10)
     bankname = models.CharField(max_length=5)
     promptpay = models.CharField(max_length=10)
-    create_time = models.DateTimeField()
+    create_time = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
         return "%s %s %s" % (self.owner_name,self.email,self.phone)
+
+class Openday(models.Model):
+    day_id = models.IntegerField(primary_key=True)
+    day = models.CharField(max_length=3)
+
+    def __str__(self):
+        return self.day
 
 class Store(models.Model):
     store_id = models.AutoField(primary_key=True)
@@ -32,18 +41,11 @@ class Store(models.Model):
     detail = models.CharField(max_length=255)
     open_time = models.TimeField()
     close_time = models.TimeField()
+    open_day = models.ManyToManyField(Openday)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
     def __str__(self):
         return "%s %s %s %s" % (self.storename, self.detail, self.open_time, self.close_time)
-
-class Opendate(models.Model):
-    date_id = models.IntegerField(primary_key=True)
-    date = models.IntegerField()
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return " "
 
 class Category(models.Model):
     category_id = models.IntegerField(primary_key=True)
@@ -74,9 +76,10 @@ class Menu(models.Model):
     name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=5,decimal_places=2)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    store_id = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     ingredient = models.ManyToManyField(Ingredient)
-    
+    image = models.ForeignKey(Image,on_delete=models.CASCADE, null=True)
+
     def __str__(self):
         return "%s %s %d" % (self.name, self.category, self.price)
 
@@ -86,7 +89,7 @@ class Customer(models.Model):
     username = models.CharField(max_length=45)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=32)
-    create_time = models.DateTimeField()
+    create_time = models.DateTimeField(default=datetime.datetime.now)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
     def getName(self):
@@ -97,7 +100,7 @@ class Customer(models.Model):
 
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.datetime.now)
     order_status = models.CharField(max_length=15)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
@@ -118,7 +121,7 @@ class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
     method = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=7,decimal_places=2)
-    purchase_date = models.DateTimeField()
+    purchase_date = models.DateTimeField(default=datetime.datetime.now)
     status = models.CharField(max_length=20)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
