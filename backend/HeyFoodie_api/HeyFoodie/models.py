@@ -1,17 +1,9 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.utils.safestring import mark_safe
+from multiselectfield import MultiSelectField
 import datetime
-
 # Create your models here.
-
-class Image(models.Model):
-    image_id = models.AutoField(primary_key=True)
-    image = models.ImageField(blank=True, upload_to='Image')
-    image_detail = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.image_detail
 
 class Owner(models.Model):
     owner_id = models.AutoField(primary_key=True)
@@ -28,57 +20,60 @@ class Owner(models.Model):
     def __str__(self):
         return "%s %s %s" % (self.owner_name,self.email,self.phone)
 
-class Openday(models.Model):
-    day_id = models.IntegerField(primary_key=True)
-    day = models.CharField(max_length=3)
-
-    def __str__(self):
-        return self.day
-
 class Store(models.Model):
+    Day = ((1, 'MON'),
+        (2, 'TUE'),
+        (3, 'WED'),
+        (4, 'THU'),
+        (5, 'FRI'),
+        (6, 'SAT'),
+        (7, 'SUN'))
+
     store_id = models.AutoField(primary_key=True)
     storename = models.CharField(max_length=50)
     detail = models.CharField(max_length=255)
     open_time = models.TimeField()
     close_time = models.TimeField()
-    open_day = models.ManyToManyField(Openday)
+    open_day = MultiSelectField(choices=Day,max_choices=7,max_length=7, null=False)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
     def __str__(self):
         return "%s %s %s %s" % (self.storename, self.detail, self.open_time, self.close_time)
 
 class Category(models.Model):
-    category_id = models.IntegerField(primary_key=True)
+    category_id = models.AutoField(primary_key=True)
     category_name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.category_name
 
 class Ingredient_Category(models.Model):
-    ingredient_category_id = models.IntegerField(primary_key=True)
+    ingredient_category_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
 
 class Ingredient(models.Model):
-    ingredient_id = models.IntegerField(primary_key=True)
-    ingredient_name = models.CharField(max_length=45)
-    Ingredient_category_id = models.ForeignKey(Ingredient_Category, on_delete=models.CASCADE)
+    ingredient_id = models.AutoField(primary_key=True)
+    ingredient_name = models.CharField(max_length=50)
+    Ingredient_category = models.ForeignKey(Ingredient_Category, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=5,decimal_places=2)
-    image = models.ForeignKey(Image,on_delete=models.CASCADE, null=True)
+    image = models.ImageField(blank=True, upload_to='Image',null=True)
 
     def __str__(self):
         return "%s %d" % (self.ingredient_name, self.price)
 
 class Menu(models.Model):
-    menu_id = models.IntegerField(primary_key=True)
+    menu_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    price = models.DecimalField(max_digits=5,decimal_places=2)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
     ingredient = models.ManyToManyField(Ingredient)
-    image = models.ForeignKey(Image,on_delete=models.CASCADE, null=True)
+    price = models.DecimalField(max_digits=5,decimal_places=2)
+    image = models.ImageField(blank=True, upload_to='Image', null=True)
+
+    def setName(self,name):
+        self.name = name
 
     def __str__(self):
         return "%s %s %d" % (self.name, self.category, self.price)
@@ -90,7 +85,7 @@ class Customer(models.Model):
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=32)
     create_time = models.DateTimeField(default=datetime.datetime.now)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    image = models.ImageField(blank=True, upload_to='Image', null=True)
 
     def getName(self):
         return self.customername
@@ -115,7 +110,7 @@ class Order_Detail(models.Model):
     quantity = models.IntegerField()
 
     def __str__(self):
-        return " "
+        return "%s %s" % (self.order_detail_id, self.order_id)
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
@@ -190,3 +185,14 @@ class Bestsellmenu_Month(models.Model):
     def __str__(self):
         return "%s %s" % (self.rating, self.menu)
 
+
+class Cart(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    item = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.quantity} of {self.item.name}'
+    
+ 

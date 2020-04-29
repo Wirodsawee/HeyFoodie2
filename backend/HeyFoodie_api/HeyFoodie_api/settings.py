@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'multiselectfield',
     'corsheaders',
-    'HeyFoodie'
+    'HeyFoodie',
 ]
 
 REST_FRAMEWORK = {
@@ -47,6 +48,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -61,7 +63,9 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    # 'http://localhost:3000/'
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://localhost:8080',
 ]
 
 ROOT_URLCONF = 'HeyFoodie_api.urls'
@@ -101,7 +105,7 @@ DATABASES = {
         'HOST': '',   # Or an IP Address that your DB is hosted on
         'PORT': '',
         'OPTION':{
-            'init_command': "SET sql_mode='SET sql_mode='STRICT_TRANS_TABLES'"
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
 }
@@ -131,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
