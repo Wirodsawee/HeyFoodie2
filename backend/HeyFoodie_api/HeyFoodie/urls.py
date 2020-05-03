@@ -10,5 +10,7 @@ urlpatterns = [
     path('ingredient/',views.ListIngredient.as_view()),
     path('ingredient/<int:pk>/', views.DetailIngredient.as_view()),
     path('menu/', views.ListMenu.as_view()),
-    path('menu/<int:pk>/', views.DetailMenu.as_view())
+    path('menu/<int:pk>/', views.DetailMenu.as_view()),
+    path('store/', views.ListStore.as_view()),
+    path('store/<int:pk>/', views.DetailStore.as_view())
 ]

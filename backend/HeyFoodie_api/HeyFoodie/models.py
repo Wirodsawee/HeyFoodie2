@@ -20,15 +20,15 @@ class Owner(models.Model):
     def __str__(self):
         return "%s %s %s" % (self.owner_name,self.email,self.phone)
 
-class Store(models.Model):
-    Day = ((1, 'MON'),
-        (2, 'TUE'),
-        (3, 'WED'),
-        (4, 'THU'),
-        (5, 'FRI'),
-        (6, 'SAT'),
-        (7, 'SUN'))
+Day = ((1, 'MON'),
+    (2, 'TUE'),
+    (3, 'WED'),
+    (4, 'THU'),
+    (5, 'FRI'),
+    (6, 'SAT'),
+    (7, 'SUN'))
 
+class Store(models.Model):
     store_id = models.AutoField(primary_key=True)
     storename = models.CharField(max_length=50)
     detail = models.CharField(max_length=255)

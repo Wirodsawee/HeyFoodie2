@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
+
 // function App() {
 //   return (
 //     <div className="App">
@@ -48,7 +49,7 @@ class App extends Component {
          
         {this.state.menu.map(item => (
           <div key={item.menu_id}>
-            <img src={item.image} alt='image_menu'></img>
+            <img src={item.image} alt='image_menu' width='500px' height='249px'></img>
             <h1>{item.name}</h1>
             {/* <h1>{item.category.category_name}</h1>
             {/* <h1>{item.ingredient}</h1> */}

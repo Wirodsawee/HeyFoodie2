@@ -1,5 +1,5 @@
-from rest_framework import serializers
-from .models import Category, Ingredient_Category, Ingredient, Menu
+from rest_framework import serializers, fields
+from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Owner, Day
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,10 +21,12 @@ class MenuSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     ingredient = IngredientSerializer(many=True)
 
-    # def getIngredient(self, ingredient):
-    #     return list(ingredient.ingredient_name.values_list('desc', flat=True)) 
-
     class Meta:
         model = Menu
         fields = ('menu_id', 'name','category','ingredient','price','image')
 
+class StoreSerializer(serializers.HyperlinkedModelSerializer):
+    open_day = fields.MultipleChoiceField(choices=Day)
+    class Meta:
+        model = Store
+        fields = ('store_id','storename','detail','open_time','close_time','open_day')
