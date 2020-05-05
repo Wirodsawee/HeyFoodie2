@@ -72,9 +72,6 @@ class Menu(models.Model):
     price = models.DecimalField(max_digits=5,decimal_places=2)
     image = models.ImageField(blank=True, upload_to='Image', null=True)
 
-    def getName(self):
-        return self.name
-
     def __str__(self):
         return "%s %s %d" % (self.name, self.category, self.price)
 
@@ -87,30 +84,36 @@ class Customer(models.Model):
     create_time = models.DateTimeField(default=datetime.datetime.now)
     image = models.ImageField(blank=True, upload_to='Image', null=True)
 
-    def getName(self):
-        return self.customername
-
     def __str__(self):
         return "%s %s" % (self.customername,self.email)
 
 class Order(models.Model):
+    ORDER_STATUS_CHOICES = (
+        ('WAITING', 'Waiting'),
+        ('COOKING', 'Cooking'),
+        ('READYTOPICKUP', 'Ready To Pickup'),
+        ('DONE', 'Done')
+    )
+
     order_id = models.AutoField(primary_key=True)
     date = models.DateTimeField(default=datetime.datetime.now)
-    order_status = models.CharField(max_length=15)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order_status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default='WAITING')
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return "%s %s %s" % (self.order_id,self.order_status,self.customer)
 
-
-class Order_Detail(models.Model):
+class Order_detail(models.Model):
     order_detail_id = models.AutoField(primary_key=True)
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
-    menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    
     def __str__(self):
-        return "%s %s" % (self.order_detail_id, self.order_id)
+        return "%s x %s" % (self.menu, self.quantity)
+    
+    def get_total_item_price(self):
+        return self.quantity*self.menu.price
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
@@ -184,15 +187,3 @@ class Bestsellmenu_Month(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.rating, self.menu)
-
-
-class Cart(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    item = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.quantity} of {self.item.name}'
-    
- 

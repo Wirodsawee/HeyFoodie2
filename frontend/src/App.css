@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+.col-md-4{
+  margin: auto;
+  padding: auto;
+  float: none;
+  position: absolute;
+  top: 50%;
+}
+
+.card-img {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  padding: 20px;
+  align-items: center;
+}
+
+.col-md-2{
+  margin: auto;
+  padding: auto;
+  float: none;
+  position: absolute;
+  top: 50%;
+  
+}
+
+.btn-primary, input[type="submit"] {
+  background-color: darkorange;
+  border-color: darkorange;
+}
+
+.btn-primary, input[type="submit"]:hover {
+  background-color: darkorange;
+  border-color: darkorange;
+}
+
+.card {
+  width: 50%;
+  margin: 20px auto;
+  float: none;
+  justify-content: center;
+}
