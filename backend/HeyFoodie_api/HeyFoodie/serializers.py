@@ -1,5 +1,5 @@
 from rest_framework import serializers, fields
-from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Owner, Day
+from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Owner, Day, Order, Order_detail, Customer
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,3 +30,27 @@ class StoreSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Store
         fields = ('store_id','storename','detail','open_time','close_time','open_day')
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    customer = serializers.ReadOnlyField()
+
+    class Meta: 
+        model = Order
+        fields = '__all__'
+
+class OrderDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order_detail
+        fields = '__all__'
+
+class CustomerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Customer
+        fields = '__all__'
+        extra_kwargs = {
+            'password' : {
+                'write_only': True
+            }
+        }

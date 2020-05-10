@@ -19,9 +19,9 @@ admin.site.register(Ingredient_Category)
 admin.site.register(Ingredient)
 admin.site.register(Owner)
 admin.site.register(Store)
-admin.site.register(Customer)
-admin.site.register(Order)
-admin.site.register(Order_detail)
+# admin.site.register(Customer)
+# admin.site.register(Order)
+# admin.site.register(Order_detail)
 
 # class MenuAdmin(admin.ModelAdmin):
 #     # list_display = ['image_tag',] 

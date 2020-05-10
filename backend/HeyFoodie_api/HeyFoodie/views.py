@@ -1,9 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
-from rest_framework import generics
-from .models import Category, Ingredient_Category, Ingredient, Menu, Store
+from django.contrib.auth.hashers import make_password
+
+from rest_framework import generics, permissions, viewsets
+from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Order, Order_detail
+from .models import Customer
 from .serializers import MenuSerializer, CategorySerializer, IngredientCategorySerializer, IngredientSerializer, StoreSerializer
+# from .serializers import OrderSerializer, OrderDetailSerializer, CustomerSerializer
+
+import json
+import logging
 
 # Create your views here.
 
@@ -47,3 +54,14 @@ class DetailStore(generics.RetrieveUpdateDestroyAPIView) :
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
 
+# class ListCustomer(generics.ListCreateAPIView):
+#     queryset = Customer.objects.all()
+#     serializer_class = CustomerSerializer
+
+# class ListOrder(generics.ListCreateAPIView):
+#     queryset = Order.objects.all()
+#     serializer_class = OrderSerializer
+
+# class ListOrderDetail(generics.ListCreateAPIView):
+#     queryset = Order_detail.objects.all()
+#     serializer_class = OrderDetailSerializer

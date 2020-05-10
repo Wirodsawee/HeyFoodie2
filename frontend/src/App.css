@@ -62,19 +62,175 @@
   
 }
 
-.btn-primary, input[type="submit"] {
-  background-color: darkorange;
-  border-color: darkorange;
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: darkorange !important;
+  border-color: darkorange !important; 
+  outline-color: darkorange !important;
+  box-shadow: darkorange !important;
 }
 
-.btn-primary, input[type="submit"]:hover {
-  background-color: darkorange;
-  border-color: darkorange;
+.btn.btn-primary {
+  width: 157;
+  height: 64;
+  border-radius: 20;
 }
 
-.card {
-  width: 50%;
+.card.w-50 {
+  font-family:'Kanit', sans-serif;
+  width: 994;
+  height: 154;
   margin: 20px auto;
   float: none;
   justify-content: center;
+}
+
+.card-title {
+  font-size: 30;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.navbar-expand-lg .navbar-brand{
+  font-family: 'Kanit', sans-serif !important;
+  font-size: 30px !important;
+  margin-left: 50px !important; 
+  color: white !important; 
+} 
+
+.navbar-expand-lg{
+  width: 100% !important;
+  height: 65px !important;
+  background-color: #FFAA00 !important; 
+}
+
+.navbar-expand-custom .navbar-nav {
+  flex-direction: row; 
+}
+.nav-item.nav-link{
+  font-family:'Kanit', sans-serif !important;
+  padding-right: .5rem;
+  padding-left: .5rem;
+  margin-right: 20px;
+  color: white !important;
+  font-size: 20px;
+}
+
+.navbar-expand-custom .navbar-collapse {
+    display: flex  !important;
+    align-items: flex-end !important;
+}
+
+.nav-user{
+  width: 25px;
+  height: 25px;
+  margin-right: .5rem;
+}
+
+.nav-cart{
+  width: 25px;
+  height: 25px;
+}
+
+.badge.badge-secondary.badge-pill{
+  background-color: #D4320E;
+  color: white;
+}
+
+.collapse.navbar-collapse{
+  justify-content: end !important;
+  margin-right: 100px;
+}
+
+
+.d-block.w-100{
+  width: 100% !important;
+  height: 600px;
+}
+
+.carousel {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 100px;
+  
+}
+
+.con{
+  width: 100% !important;
+}
+
+.footer-foot{
+  font-family: 'Kanit', sans-serif;
+  color: white;
+  margin-top: 100px;
+  padding-top: 40px;
+  width: 100%;
+  height: 265px;
+  background-color: #FFAA00;
+}
+
+.col-md-6.mt-md-0.mt-3{
+  padding-left: 50px;
+  padding-top: 25px;
+}
+
+.text-store{
+  font-size: 36px;
+}
+
+.text-uppercase{
+  font-size: 20px;
+  padding-left: 30px;
+  padding-top: 2px;
+}
+
+.img-footer{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.list-unstyled.place li{
+  font-size: 20px;
+}
+
+.list-unstyled li{
+  margin-bottom: 5px;
+}
+
+.footer-hr{
+  border-top: 2px solid white;
+  width: 93%;
+}
+
+.footer-copyright.text-left{
+  padding-left: 50px;
+  float: left;
+}
+
+.footer.text-right{
+  float: right;
+  padding-right: 50px;
 }
