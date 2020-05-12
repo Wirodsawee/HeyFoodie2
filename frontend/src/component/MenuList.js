@@ -1,75 +1,106 @@
-import React, { Component } from 'react';
-import MenuDataService from '../services/menu.service';
+import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 import home from '../img/home/home.jpg';
 import home2 from '../img/home/home2.png';
+import Menu from './Menu';
+import Cart from './Cart';
+import Header from './Header';
+import Footer from './Footer';
+// import Popover from 'react-bootstrap/Popover';
 
-class MenuList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menu: []
-    }
-  }
+function MenuList() {
+  const [cart, setCart] = useState([]);
+  const [menus, setMenus] = useState([]);
+  const [prices, setTotalPrice] = useState(0.00);
+  const [quantity, setQuantity] = useState(0);
 
+  const getItems = () => fetch("http://127.0.0.1:8000/api/menu/").then(res => res.json());
 
-  componentDidMount() {
-    MenuDataService.getAll()
-      .then(response => {
-        this.setState({
-          menu: response.data
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+  useEffect(() => {
+    getItems().then(data => setMenus(data));
+  }, []);
 
-  render() {
-    var menu = this.state.menu;
-    return (
+  const handleAddItemToCart = (menu) => {
+    const tempCart = [...cart];
+    tempCart.push(menu);
+    setCart(tempCart);
+    const amountTotal = prices + parseFloat(menu.price);
+    setTotalPrice(amountTotal);
+    const itemQuantity = quantity + 1;
+    setQuantity(itemQuantity);
+  };
+
+  const handleRemoveSingleItemOnCart = (index) => {
+    const tempCart = [...cart];
+    const menu = tempCart[index];
+    tempCart.splice(index, 1);
+    setCart(tempCart);
+    const amountTotal = prices - parseFloat(menu.price);
+    setTotalPrice(amountTotal);
+    const itemQuantity = quantity - 1;
+    setQuantity(itemQuantity);
+  };
+
+  const showCart = () => (
+    <div>
+    <Cart
+      cart={cart}
+      handleRemoveSingleItemOnCart={handleRemoveSingleItemOnCart}
+      prices={prices}
+    />
+  </div>
+  );
+
+  return (
+    <div>
+      <div>
+        <Header
+          cart={cart}
+          quantity={quantity}
+          showCart={showCart}
+          handleRemoveSingleItemOnCart={handleRemoveSingleItemOnCart}
+          prices={prices}
+          >
+        </Header>
+      </div>
+
       <div className="ctn">
         <Carousel className="carousel">
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src={home}
-                        alt="First slide"
-                    />
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src={home2}
-                        alt="Second slide"
-                    />
-                </Carousel.Item>
-            </Carousel>
-
-        <div className="ctn-menu">
-        {menu.map(function (item, i) {
-          return  <div key={i}>
-                    {[
-                      <div className="card w-50"  key={i}>
-                        <div className="row no-gutters">
-                          <div className="col-md-3"><img className="card-img" src={item.image} alt='image_menu'></img></div>
-                          <div className="col-md-4">
-                          <h5 className="card-title">{item.name}</h5>
-                          <p className="card-text">{item.price} บาท</p>
-                          </div>
-                          <div className="col-md-2 button">
-                            <input type="submit" id="{item.menu_id}" name="add_to_cart" className="btn btn-primary" value="เลือก" />
-                          </div>
-                        </div>
-                      </div>
-                    ]}
-                </div>
-        })}
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={home}
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src={home2}
+              alt="Second slide"
+            />
+          </Carousel.Item>
+        </Carousel>
       </div>
+      <div className="ctn-menu">
+        {menus.map((menu, index) => (
+          <Menu
+            className="card w-50"
+            key={index}
+            handleAddItemToCart={handleAddItemToCart}
+            menu={menu}
+          />
+        ))}
+      </div>
+
+      <div>
+        <Footer />
+      </div>
+
     </div>
-    );
-  }
+  );
+
+
 
 }
 export default MenuList;

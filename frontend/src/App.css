@@ -62,17 +62,18 @@
   
 }
 
+.btn.btn-primary {
+  width: 157 !important;
+  height: 64 !important;
+  border-radius: 20 !important;
+}
+
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
   background-color: darkorange !important;
   border-color: darkorange !important; 
   outline-color: darkorange !important;
-  box-shadow: darkorange !important;
-}
-
-.btn.btn-primary {
-  width: 157;
-  height: 64;
-  border-radius: 20;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important; 
 }
 
 .card.w-50 {
@@ -133,6 +134,7 @@
   font-family:'Kanit', sans-serif !important;
   padding-right: .5rem;
   padding-left: .5rem;
+  margin-top: 10px !important;
   margin-right: 20px;
   color: white !important;
   font-size: 20px;
@@ -233,4 +235,72 @@
 .footer.text-right{
   float: right;
   padding-right: 50px;
+}
+
+.btn-cart, .btn-cart:hover, .btn-cart:active,
+.btn-del, .btn-del:hover, .btn-del:active{
+  background-color: Transparent !important;
+  border: none !important;
+  cursor:pointer !important;
+  overflow: hidden !important;
+  outline:none !important;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important; 
+}
+
+.btn-cart {
+  margin-top: -3px;
+}
+
+.text-left{
+  float: left;
+  margin-right: 10px;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.text-right{
+  float: right;
+  padding: 10px;
+}
+
+#popover-basic{
+  float: right !important;
+  margin-right: auto;
+  width: 100% !important;
+  background-color: #FEE8C6;
+  border: none;
+}
+
+.card-block, .card.cart{
+  background-color: #FEE8C6 !important;
+  font-family: 'Kanit', sans-serif;
+  border: none;
+}
+
+.list-menu{
+  margin-bottom: 10px;
+}
+
+.order{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.img-icon{
+  width: 15px;
+  height: 15px;
+  margin-top: -2px;
+  margin-left: -5px !important;
+}
+
+.shoppingCart{
+  width: 100%;
+
+}
+
+.noItem{
+  height: 100px;
+  text-align: center;
+  padding: 45px;
 }
