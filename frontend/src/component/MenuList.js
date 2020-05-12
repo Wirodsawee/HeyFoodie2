@@ -11,13 +11,27 @@ import Footer from './Footer';
 function MenuList() {
   const [cart, setCart] = useState([]);
   const [menus, setMenus] = useState([]);
-  const [prices, setTotalPrice] = useState(0.00);
+  const [prices, setTotalPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const [store, setStore] = useState([]);
+  const [owner, setOwner] = useState([]);
 
   const getItems = () => fetch("http://127.0.0.1:8000/api/menu/").then(res => res.json());
 
   useEffect(() => {
     getItems().then(data => setMenus(data));
+  }, []);
+
+  const getStore = () => fetch("http://127.0.0.1:8000/api/store/1").then(res => res.json());
+
+  useEffect(() => {
+    getStore().then(data => setStore(data));
+  }, []);
+
+  const getOwner = () => fetch("http://127.0.0.1:8000/api/owner/1").then(res => res.json());
+
+  useEffect(() => {
+    getOwner().then(data => setOwner(data));
   }, []);
 
   const handleAddItemToCart = (menu) => {
@@ -60,6 +74,7 @@ function MenuList() {
           showCart={showCart}
           handleRemoveSingleItemOnCart={handleRemoveSingleItemOnCart}
           prices={prices}
+          store={store}
           >
         </Header>
       </div>
@@ -94,7 +109,10 @@ function MenuList() {
       </div>
 
       <div>
-        <Footer />
+        <Footer
+        store={store}
+        owner={owner}
+        />
       </div>
 
     </div>

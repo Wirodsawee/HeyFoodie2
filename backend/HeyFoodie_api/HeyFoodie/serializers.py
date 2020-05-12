@@ -1,5 +1,5 @@
 from rest_framework import serializers, fields
-from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Owner, Day, Order, Order_detail, Customer
+from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Owner, Day, Order, Order_detail, Customer, Owner
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,8 +49,9 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = '__all__'
-        extra_kwargs = {
-            'password' : {
-                'write_only': True
-            }
-        }
+
+
+class OwnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Owner
+        fields = ('owner_id', 'email', 'phone')

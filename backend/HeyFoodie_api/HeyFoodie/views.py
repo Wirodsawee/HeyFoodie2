@@ -4,9 +4,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.hashers import make_password
 
 from rest_framework import generics, permissions, viewsets
-from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Order, Order_detail
+from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Order, Order_detail, Owner
 from .models import Customer
-from .serializers import MenuSerializer, CategorySerializer, IngredientCategorySerializer, IngredientSerializer, StoreSerializer
+from .serializers import MenuSerializer, CategorySerializer, IngredientCategorySerializer, IngredientSerializer, StoreSerializer, OwnerSerializer
 # from .serializers import OrderSerializer, OrderDetailSerializer, CustomerSerializer
 
 import json
@@ -53,6 +53,14 @@ class ListStore(generics.ListCreateAPIView):
 class DetailStore(generics.RetrieveUpdateDestroyAPIView) :
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
+
+class ListOwner(generics.ListCreateAPIView):
+    queryset = Owner.objects.all()
+    serializer_class = OwnerSerializer
+
+class DetailOwner(generics.RetrieveUpdateDestroyAPIView) :
+    queryset = Owner.objects.all()
+    serializer_class = OwnerSerializer
 
 # class ListCustomer(generics.ListCreateAPIView):
 #     queryset = Customer.objects.all()

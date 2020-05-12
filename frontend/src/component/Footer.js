@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import StoreDataService from '../services/store.service';
 import place from '../img/icon/place.png';
 import line from '../img/icon/line.png';
 import fb from '../img/icon/fb.png';
@@ -8,50 +7,17 @@ import mail_outline from '../img/icon/mail_outline.png';
 import twitter from '../img/icon/twitter.png';
 import phone from '../img/icon/phone.png';
 
-export class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      store: {
-        "id": null,
-        "storename": "",
-        "detail": "",
-        "open_time": null,
-        "close_time": null,
-        "open_day": null
-      }
-    }
-  }
-
-  componentDidMount() {
-    StoreDataService.getStore()
-      .then(response => {
-        this.setState({
-          id: response.data.id,
-          storename: response.data.title,
-          detail: response.data.detail,
-          open_time: response.data.open_time,
-          close_time: response.data.close_time,
-          open_day: response.data.open_day
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-
+class Footer extends Component {
+  
   render() {
-    var storename = this.state.store.storename;
-    var detail = this.state.store.detail;
     return (
       <div>
         <footer className="footer-foot">
           <div className="container-fluid text-center text-md-left">
             <div className="row">
               <div className="col-md-6 mt-md-0 mt-3">
-                <h5 className="text-store">{storename}HeyFoodie</h5>
-                <p>{detail}About store</p>
+                <h5 className="text-store">{this.props.store.storename}</h5>
+                <p>{this.props.store.detail}</p>
               </div>
 
               <div className="col-md-3 mb-md-0 mb-3 place">
@@ -69,13 +35,13 @@ export class Header extends Component {
                 <h5 className="text-uppercase">ติดต่อร้าน</h5>
                 <ul className="list-unstyled">
                   <li>
-                    <img className="img-footer" src={phone} alt="phone-icon"/>Phone:
+                    <img className="img-footer" src={phone} alt="phone-icon" />Phone: {this.props.owner.phone}
                   </li>
                   <li>
-                    <img className="img-footer" src={mail_outline} alt="mail-icon" />E-mail:
+                    <img className="img-footer" src={mail_outline} alt="mail-icon" />E-mail: {this.props.owner.email}
                   </li>
                   <li>
-                    <img className="img-footer" src={line} alt="line-icon"/>Line:
+                    <img className="img-footer" src={line} alt="line-icon" />Line: {this.props.owner.phone}
                   </li>
 
                 </ul>
@@ -87,9 +53,9 @@ export class Header extends Component {
           <div className="footer-copyright text-left">© HeyFoodie
           </div>
           <div className="footer text-right">
-              <img className="img-footer" src={fb} alt="fb-icon"/>
-              <img className="img-footer" src={twitter} alt="twitter-icon"/>
-              <img className="img-footer" src={ig} alt="ig-icon"/>
+            <img className="img-footer" src={fb} alt="fb-icon" />
+            <img className="img-footer" src={twitter} alt="twitter-icon" />
+            <img className="img-footer" src={ig} alt="ig-icon" />
           </div>
         </footer>
       </div>
@@ -97,5 +63,5 @@ export class Header extends Component {
     )
   }
 }
-export default Header
+export default Footer;
 

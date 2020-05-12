@@ -12,6 +12,8 @@ urlpatterns = [
     path('menu/<int:pk>/', views.DetailMenu.as_view()),
     path('store/', views.ListStore.as_view()),
     path('store/<int:pk>/', views.DetailStore.as_view()),
+    path('owner/', views.ListOwner.as_view()),
+    path('owner/<int:pk>/', views.DetailOwner.as_view()),
     # path('customer/', views.ListCustomer.as_view()),
     # path('order/', views.ListOrder.as_view()),
     # path('orderd/', views.ListOrderDetail.as_view())

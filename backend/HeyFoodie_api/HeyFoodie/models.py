@@ -29,7 +29,7 @@ class Store(models.Model):
     detail = models.CharField(max_length=255)
     open_time = models.TimeField()
     close_time = models.TimeField()
-    open_day = MultiSelectField(choices=Day,max_choices=7,max_length=7, null=False)
+    open_day = MultiSelectField(choices=Day,max_choices=7,max_length=20, null=False)
 
     def __str__(self):
         return self.storename
