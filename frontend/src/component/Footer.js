@@ -15,12 +15,12 @@ class Footer extends Component {
         <footer className="footer-foot">
           <div className="container-fluid text-center text-md-left">
             <div className="row">
-              <div className="col-md-6 mt-md-0 mt-3">
+              <div className="col-md-5 mt-md-0 mt-3">
                 <h5 className="text-store">{this.props.store.storename}</h5>
                 <p>{this.props.store.detail}</p>
               </div>
 
-              <div className="col-md-3 mb-md-0 mb-3 place">
+              <div className="col-md-3 mb-md-0 mb-3">
                 <ul className="list-unstyled place">
                   <li>
                     <img className="img-footer" src={place} alt="img-place" />ที่ตั้งร้าน
@@ -30,7 +30,7 @@ class Footer extends Component {
                 <p>437/87-88 Moo 9, Soi 6, Beach Road, Pattaya 20150 Thailand</p>
               </div>
 
-              <div className="col-md-3 mb-md-0 mb-3 contact">
+              <div className="col-md-3 mb-md-0 mb-3">
 
                 <h5 className="text-uppercase">ติดต่อร้าน</h5>
                 <ul className="list-unstyled">

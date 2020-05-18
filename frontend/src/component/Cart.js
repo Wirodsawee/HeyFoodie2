@@ -33,7 +33,7 @@ class Cart extends Component {
             </ul>
           </div>
 
-          <div className="text-right">
+          <div className="total text-right">
             ราคารวม {this.props.prices}.00 ฿
         </div>
           <div className="order">

@@ -37,29 +37,17 @@
   }
 }
 
-.col-md-4{
-  margin: auto;
-  padding: auto;
-  float: none;
-  position: absolute;
-  top: 50%;
-}
-
 .card-img {
   width: 100px;
-  height: 100px;
+  height: 150px;
   margin: 20px;
   padding: 20px;
   align-items: center;
 }
 
-.col-md-2{
-  margin: auto;
-  padding: auto;
-  float: none;
-  position: absolute;
-  top: 50%;
-  
+.col-md-2.button{
+  text-align: center;
+  padding: 8%;
 }
 
 .btn.btn-primary {
@@ -76,17 +64,32 @@
   -moz-box-shadow: none !important; 
 }
 
-.card.w-50 {
+.card{
   font-family:'Kanit', sans-serif;
-  width: 994;
+  width: 980px;
   height: 154;
   margin: 20px auto;
   float: none;
   justify-content: center;
 }
 
+.col-md-6{
+  float: none;
+  position: absolute;
+  margin: 30px;
+  padding: 10px;
+}
 .card-title {
   font-size: 30;
+}
+
+.card-text {
+  margin-bottom: 20px;
+}
+
+.list-ingredient.list-unstyled {
+  display: inline-flex;
+  font-size: 15px;
 }
 
 .material-icons {
@@ -193,11 +196,14 @@
   background-color: #FFAA00;
 }
 
-.col-md-6.mt-md-0.mt-3{
+.col-md-5.mt-md-0.mt-3{
   padding-left: 50px;
   padding-top: 25px;
 }
 
+.col-md-3.mb-md-0.mb-3{
+  margin-left: 50px;
+}
 .text-store{
   font-size: 36px;
 }
@@ -237,6 +243,7 @@
   padding-right: 50px;
 }
 
+
 .btn-cart, .btn-cart:hover, .btn-cart:active,
 .btn-del, .btn-del:hover, .btn-del:active{
   background-color: Transparent !important;
@@ -254,14 +261,18 @@
 
 .text-left{
   float: left;
-  margin-right: 10px;
   padding-top: 10px;
   padding-left: 5px;
 }
 
 .text-right{
   float: right;
-  padding: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.total.text-right{
+  margin-top: 5px;
 }
 
 #popover-basic{
@@ -276,9 +287,11 @@
   background-color: #FEE8C6 !important;
   font-family: 'Kanit', sans-serif;
   border: none;
+  width: 250px;
 }
 
 .list-menu{
+  width: 250px;
   margin-bottom: 10px;
 }
 
@@ -304,3 +317,4 @@
   text-align: center;
   padding: 45px;
 }
+
