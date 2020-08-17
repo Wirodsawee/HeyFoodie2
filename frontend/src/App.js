@@ -4,6 +4,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import MenuList from './component/MenuList';
+import Checkout from './component/Checkout';
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
 
           <div className="con">
             <Switch >
-              <Route exact path={["/", "/menu"]} component={MenuList} />
+              <Route exact path={["/", "/home"]} component={MenuList} />
+              <Route path={["/checkout"]} component={Checkout} />
             </Switch>
           </div>
 

@@ -6,7 +6,7 @@ import Menu from './Menu';
 import Cart from './Cart';
 import Header from './Header';
 import Footer from './Footer';
-// import Popover from 'react-bootstrap/Popover';
+
 
 function MenuList() {
   const [cart, setCart] = useState([]);
