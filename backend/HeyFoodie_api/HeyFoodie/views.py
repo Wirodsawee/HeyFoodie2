@@ -5,9 +5,10 @@ from django.contrib.auth.hashers import make_password
 
 from rest_framework import generics, permissions, viewsets
 from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Order, Order_detail, Owner
-from .models import Customer
+from .models import Customer, SaleSize
 from .serializers import MenuSerializer, CategorySerializer, IngredientCategorySerializer, IngredientSerializer, StoreSerializer, OwnerSerializer
-# from .serializers import OrderSerializer, OrderDetailSerializer, CustomerSerializer
+from .serializers import SalesizeSerializer 
+# OrderSerializer, OrderDetailSerializer, CustomerSerializer
 
 import json
 import logging
@@ -61,6 +62,14 @@ class ListOwner(generics.ListCreateAPIView):
 class DetailOwner(generics.RetrieveUpdateDestroyAPIView) :
     queryset = Owner.objects.all()
     serializer_class = OwnerSerializer
+
+class ListSalesize(generics.ListCreateAPIView):
+    queryset = SaleSize.objects.all()
+    serializer_class = SalesizeSerializer
+
+class DetailSalesize(generics.RetrieveUpdateDestroyAPIView):
+    queryset = SaleSize.objects.all()
+    serializer_class = SalesizeSerializer
 
 # class ListCustomer(generics.ListCreateAPIView):
 #     queryset = Customer.objects.all()

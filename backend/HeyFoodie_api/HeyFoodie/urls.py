@@ -14,6 +14,8 @@ urlpatterns = [
     path('store/<int:pk>/', views.DetailStore.as_view()),
     path('owner/', views.ListOwner.as_view()),
     path('owner/<int:pk>/', views.DetailOwner.as_view()),
+    path('salesize/', views.ListSalesize.as_view()),
+    path('salesize/<int:pk>/', views.DetailSalesize.as_view())
     # path('customer/', views.ListCustomer.as_view()),
     # path('order/', views.ListOrder.as_view()),
     # path('orderd/', views.ListOrderDetail.as_view())

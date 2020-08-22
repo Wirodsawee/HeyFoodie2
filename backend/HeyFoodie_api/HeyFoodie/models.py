@@ -4,7 +4,6 @@ from django.contrib.auth.hashers import make_password
 from django.utils.safestring import mark_safe
 from multiselectfield import MultiSelectField
 import datetime
-# Create your models here.
 
 class Owner(models.Model):
     owner_id = models.AutoField(primary_key=True)
@@ -63,11 +62,19 @@ class Menu(models.Model):
     name = models.CharField(max_length=50)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     ingredient = models.ManyToManyField(Ingredient)
-    price = models.DecimalField(max_digits=5,decimal_places=2)
     image = models.ImageField(blank=True, upload_to='Image', null=True)
 
     def __str__(self):
         return self.name
+
+class SaleSize(models.Model):
+    salesize_id = models.AutoField(primary_key=True)
+    size = models.CharField(max_length=3)
+    price = models.DecimalField(max_digits=5,decimal_places=2)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "%s %s %d" % (self.menu, self.size, self.price)
 
 class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
@@ -105,8 +112,6 @@ class Order_detail(models.Model):
     def __str__(self):
         return "%s x %s" % (self.menu, self.quantity)
     
-    def get_total_item_price(self):
-        return self.quantity*self.menu.price
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
