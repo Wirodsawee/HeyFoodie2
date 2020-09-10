@@ -1,6 +1,6 @@
 from rest_framework import serializers, fields
 from .models import Category, Ingredient_Category, Ingredient, Menu, Store, Owner, Day, Order, Order_detail, Customer, Owner
-
+from .models import SaleSize
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -17,13 +17,18 @@ class IngredientSerializer(serializers.ModelSerializer):
         model = Ingredient
         fields = ('ingredient_id','ingredient_name','Ingredient_category','price','image')
 
+class SalesizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SaleSize
+        fields = '__all__'
+
 class MenuSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     ingredient = IngredientSerializer(many=True)
-
+    salesize = SalesizeSerializer(many=True)
     class Meta:
-        model = Menu
-        fields = ('menu_id', 'name','category','ingredient','price','image')
+        model = Menu, SaleSize
+        fields = ('menu_id', 'name','category','ingredient', 'image')
 
 class StoreSerializer(serializers.HyperlinkedModelSerializer):
     open_day = fields.MultipleChoiceField(choices=Day)
@@ -55,3 +60,4 @@ class OwnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Owner
         fields = ('owner_id', 'email', 'phone')
+
