@@ -137,11 +137,17 @@
   margin-left: 50px !important;
   color: white !important;
 }
+
 .navbar-link {
   font-family: "Kanit", sans-serif !important;
   font-size: 16px !important;
-  margin-right: 50px !important;
+  /* margin: 15px; */
+  /* margin-right: 50px !important; */
   color: white !important;
+}
+
+.btn-cart {
+  margin: 5px;
 }
 
 .food-navbar-expand-lg {
@@ -152,7 +158,8 @@
 .nav-user {
   width: 25px;
   height: 25px;
-  margin-right: 0.5rem;
+  /* margin-right: 0.5rem; */
+  margin: 5px;
 }
 
 .nav-cart {
@@ -253,10 +260,6 @@
   outline: none !important;
   box-shadow: none !important;
   -moz-box-shadow: none !important;
-}
-
-.btn-cart {
-  margin-top: -3px;
 }
 
 .text-left {

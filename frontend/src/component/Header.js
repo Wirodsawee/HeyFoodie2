@@ -17,13 +17,13 @@ export default function Header(props) {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Item>
-            <a className="text-white" href="/login">
+            <a className="navbar-link" href="/login">
               <img className="nav-user" src={user} alt="img-user"></img>
-              เข้าสู่ระบบ/ลงทะเบียน
+              Login
             </a>
-          </Nav.Item>
+            </Nav.Item>
           <Nav.Item>
-            <Button className="btn-cart ml-4">
+            <Button className="btn-cart ml-auto">
               <img className="nav-cart" src={cart} alt="img-cart"></img>
               <span className="badge badge-secondary badge-pill">
                 {props.quantity}
