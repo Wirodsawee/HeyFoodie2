@@ -43,12 +43,12 @@ export default function CommonPayment() {
         </div>
 
         <div className="row justify-content-center">
-          <div class="col-2 p-0 text-center">
-            <button className="btn btn-outline-primary ">Back</button>
+          <div class="col-3 p-0 text-center">
+            <button className="btn btn-outline-primary">Back</button>
           </div>
           <div class="col-1 p-0 text-center"></div>
           <div class="col-3 p-0 text-center">
-            <button className="btn btn-primary ">Confirm</button>
+            <button className="btn btn-outline-primary">Confirm</button>
           </div>
         </div>
       </CommonCard>
